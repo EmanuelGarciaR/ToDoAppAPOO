@@ -1,5 +1,5 @@
 # TODO: Add code here
-class TODO:
+class Todo:
     def __init__(self, code_id: int, title: str, description: str, completed: bool = False, tags: list[str] = None):
         self.code_id = code_id
         self.title = title
@@ -8,7 +8,7 @@ class TODO:
         self.tags = tags if tags is not None else []
 
     def __str__(self):
-        return f"{self.code_id}-{self.title}"
+        return f"{self.code_id} - {self.title}"
 
     def mark_completed(self):
         self.completed = True
@@ -20,23 +20,23 @@ class TODO:
 
 
 class TodoBook:
-    def __init__(self, todos: dict[int, TODO] = None):
+    def __init__(self, todos: dict[int, Todo] = None):
         self.todos = todos if todos is not None else {}
 
     def add_todo(self, title: str, description: str) -> int:
         new_id = len(self.todos) + 1
 
-        new_todo = TODO(code_id=new_id, title=title, description=description)
+        new_todo = Todo(code_id=new_id, title=title, description=description)
 
         # Agregar el objeto TODO al diccionario 'todos' usando el ID como clave
         self.todos[new_id] = new_todo
 
         return new_id
 
-    def pending_todos(self) -> list[TODO]:
+    def pending_todos(self) -> list[Todo]:
         return [todo for todo in self.todos.values() if not todo.completed]
 
-    def completed_todos(self) -> list[TODO]:
+    def completed_todos(self) -> list[Todo]:
         return [todo for todo in self.todos.values() if todo.completed]
 
     def tags_todo_count(self) -> dict[str, int]:
